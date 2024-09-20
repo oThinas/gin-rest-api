@@ -71,6 +71,11 @@ func CreateStudent(c *gin.Context) {
 		return
 	}
 
+	if err := student.Validate(); err != nil {
+		respondWithError(c, http.StatusBadRequest, err.Error())
+		return
+	}
+
 	database.DB.Create(&student)
 	respondWithSuccess(c, student, http.StatusCreated)
 }
@@ -84,6 +89,11 @@ func UpdateStudent(c *gin.Context) {
 	}
 
 	if err := c.ShouldBindJSON(&student); err != nil {
+		respondWithError(c, http.StatusBadRequest, err.Error())
+		return
+	}
+
+	if err := student.Validate(); err != nil {
 		respondWithError(c, http.StatusBadRequest, err.Error())
 		return
 	}
