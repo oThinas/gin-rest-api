@@ -116,3 +116,15 @@ func DeleteStudentById(c *gin.Context) {
 		"student": student,
 	})
 }
+
+func Index(c *gin.Context) {
+	var students []models.Student
+	database.DB.Find(&students)
+	c.HTML(http.StatusOK, "index.html", gin.H{
+		"students": students,
+	})
+}
+
+func NotFound(c *gin.Context) {
+	c.HTML(http.StatusNotFound, "404.html", nil)
+}

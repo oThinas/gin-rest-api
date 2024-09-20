@@ -10,6 +10,8 @@ import (
 func main() {
 	database.Connect()
 	r := gin.Default()
+	r.LoadHTMLGlob("templates/*.html")
+	r.Static("/assets", "./assets")
 	r.SetTrustedProxies(nil)
 	routes.HandleRequest(r)
 	r.Run(":8080")

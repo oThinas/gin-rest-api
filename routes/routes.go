@@ -13,4 +13,7 @@ func HandleRequest(r *gin.Engine) {
 	r.POST("/api/students", controllers.CreateStudent)
 	r.PUT("/api/students/:id", controllers.UpdateStudent)
 	r.DELETE("/api/students/:id", controllers.DeleteStudentById)
+
+	r.GET("/index", controllers.Index)
+	r.NoRoute(controllers.NotFound)
 }
